@@ -114,3 +114,49 @@ function addEtudiantsbyNom($nom, $prenom, $titre, $age, $passwd, $email, $ville)
         return $rep;
     }
 }
+function getStudentById($id) {
+    $sql = "SELECT * FROM etudiants ";
+    $sql .= "WHERE id= $id;";
+    $rep=[];
+
+    try {
+        $bdd = dbConnect();
+        $req = $bdd->query($sql);
+        $req->setFetchMode(PDO::FETCH_CLASS, 'Etudiant');
+        $rep = $req->fetch();
+    }
+    catch (PDOException $ex) {
+        var_dump("Erreur GET COURS: {$ex->getMessage()}");
+    }
+    finally {
+        return $rep;
+    }
+}
+function updateEtudiants($id, $nom, $prenom, $titre, $age, $passwd, $email, $ville){
+
+    $sql = "UPDATE etudiants ";
+    $sql .= "SET nom= :nom, prenom= :prenom, titre= :titre, age= :age, passwd= :passwd, email= :email, statut=0, ville= :ville ";
+    // $sql.="SET nom= $nom, prenom= $prenom,"
+    $sql .= "WHERE id= $id;";
+    $rep=false;
+
+    try {
+        $rep=true;
+        $bdd = dbConnect();
+        $req = $bdd->prepare($sql);
+        $req->bindValue(':nom', $nom, PDO::PARAM_STR);
+        $req->bindValue(':prenom', $prenom, PDO::PARAM_STR);
+        $req->bindValue(':titre', $titre, PDO::PARAM_STR);
+        $req->bindValue(':age', $age, PDO::PARAM_INT);
+        $req->bindValue(':passwd', $passwd, PDO::PARAM_STR);
+        $req->bindValue(':email', $email, PDO::PARAM_STR);
+        $req->bindValue(':ville', $ville, PDO::PARAM_STR);
+        $ret = $req->execute();
+    }
+    catch (PDOException $ex) {
+        var_dump("Erreur UPDATE Etudiants: {$ex->getMessage()}");
+    }
+    finally {
+        return $rep;
+    }
+}

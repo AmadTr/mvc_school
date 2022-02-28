@@ -27,7 +27,7 @@ foreach ($etudiants as $e) {
             <td>".$e->getVille()."</td>
 
             <td>
-            <a class='btn btn-warning ajtCours' href='index.php?action=mEtudiants&id=".$e->getId()."'>Modifier</a>
+            <a class='btn btn-warning ajtCours' href='index.php?action=addUpEtudiants&id=".$e->getId()."'>Modifier</a>
             <a class='btn btn-danger ajtCours' href='index.php?action=dEtudiants&id=".$e->getId()."'>Supprimer</a>
             </td>
     </tr>";
@@ -37,7 +37,7 @@ foreach ($etudiants as $e) {
 </table>
 
 <?php
-echo"<a class='btn btn-primary ajtCours' href='index.php?action=addEtudiants'>Ajoutez un nouvelle eleve</a>";
+echo"<a class='btn btn-primary ajtCours' href='index.php?action=addUpEtudiants'>Ajoutez un nouvelle eleve</a>";
 
 $content = ob_get_clean();
 require "vue/template.php"

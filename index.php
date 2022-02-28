@@ -52,22 +52,30 @@ require "vue/template.php";
 
             // Prepare l'ajout Cours et Etudiants
             case 'addCours':
+            case 'mCours': 
+               
                 ajoutCours();
+                
             break;
 
-            case 'addEtudiants':
+            case 'addUpEtudiants': 
+                  
                 ajoutEtudiants();
             break;
 
             // Ajoute les Cours et Etudiants
-            case 'aCours':
+            case 'ajtOuMCours':
                 if(isset($_POST['nom'])){
                     $nom = htmlspecialchars($_POST['nom']);   
                 }
-                ajtCours($nom);
+                ajtOuModifCours($nom);
+            break;
+
+            case 'modifCours':
+                mdfCours($id);
             break;
             
-            case 'aEtudiants':
+            case 'ajtOuMEtudiants':
                 if(isset($_POST['nom'])){
                     $nom = htmlspecialchars($_POST['nom']);  
                     $prenom = htmlspecialchars($_POST['prenom']);  
@@ -77,7 +85,7 @@ require "vue/template.php";
                     $email = htmlspecialchars($_POST['email']);  
                     $ville = htmlspecialchars($_POST['ville']);  
                 }
-                ajtEtudiants($nom, $prenom, $titre, $age, $passwd, $email, $ville);
+                ajtOuModifEtudiants($nom, $prenom, $titre, $age, $passwd, $email, $ville);
             break;
             
             default:

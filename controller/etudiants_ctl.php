@@ -21,12 +21,22 @@
     }
 
     function ajoutEtudiants(){
+
+        if (isset($_GET['id'])) {
+           $rep= getStudentById($_GET['id']);
+        }
+
         // Demander l'affichage du formulaire
         require "vue/etudiants/add_formE.php";
     }
 
-    function ajtEtudiants($nom, $prenom, $titre, $age, $passwd, $email, $ville){
-        addEtudiantsbyNom($nom, $prenom, $titre, $age, $passwd, $email, $ville);
+    function ajtOuModifEtudiants($nom, $prenom, $titre, $age, $passwd, $email, $ville){
+        if (isset($_GET['id'])){
+            updateEtudiants($_GET['id'],$nom, $prenom, $titre, $age, $passwd, $email, $ville);
+         }
+        else {
+            addEtudiantsbyNom($nom, $prenom, $titre, $age, $passwd, $email, $ville);
+        }
         showAllEtudiants();
     }
 

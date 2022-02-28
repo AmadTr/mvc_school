@@ -21,12 +21,23 @@
     }
 
     function ajoutCours(){
+
+        if (isset($_GET['id'])) {    
+
+        $rep = getNomCoursById($_GET['id']);
+        }
         // Demander l'affichage du formulaire
         require "vue/cours/add_form.php";
     }
 
-    function ajtCours($nom){
-        addCoursbyNom($nom);
+    function ajtOuModifCours($nom){
+        if (isset($_GET['id'])){
+           updateCours($_GET['id'],$nom);
+        }
+        else{
+
+            addCoursbyNom($nom);
+        }
         showAllCourses();
     }
 
